@@ -14,6 +14,15 @@ import com.ebay.lockers.R;
  */
 public class SearchFragment extends Fragment {
 
+    private static SearchFragment searchFragment = null;
+
+    public static SearchFragment getInstance() {
+        if(searchFragment == null) {
+            searchFragment = new SearchFragment();
+        }
+        return searchFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_fragment, root, false);
@@ -22,6 +31,6 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Toast.makeText(getActivity(), "In search fragment", Toast.LENGTH_SHORT).show();
+
     }
 }

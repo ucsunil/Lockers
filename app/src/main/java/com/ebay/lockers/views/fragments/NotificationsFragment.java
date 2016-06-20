@@ -14,6 +14,15 @@ import com.ebay.lockers.R;
  */
 public class NotificationsFragment extends Fragment {
 
+    private static NotificationsFragment notificationsFragment = null;
+
+    public static NotificationsFragment getInstance() {
+        if(notificationsFragment == null) {
+            notificationsFragment = new NotificationsFragment();
+        }
+        return notificationsFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.notifications_fragment, root, false);
@@ -22,6 +31,6 @@ public class NotificationsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Toast.makeText(getActivity(), "In notifications fragment", Toast.LENGTH_SHORT).show();
+
     }
 }

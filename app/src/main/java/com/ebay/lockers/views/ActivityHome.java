@@ -80,13 +80,13 @@ public class ActivityHome extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch(position) {
                 case 0:
-                    return new HomeFragment();
+                    return HomeFragment.getInstance();
                 case 1:
-                    return new SearchFragment();
+                    return SearchFragment.getInstance();
                 case 2:
-                    return new ItemsFragment();
+                    return ItemsFragment.getInstance();
                 case 3:
-                    return new NotificationsFragment();
+                    return NotificationsFragment.getInstance();
                 case 4:
                     return new LockersFragment();
             }

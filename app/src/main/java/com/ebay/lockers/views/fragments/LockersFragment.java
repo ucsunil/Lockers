@@ -14,6 +14,15 @@ import com.ebay.lockers.R;
  */
 public class LockersFragment extends Fragment {
 
+    private static LockersFragment lockersFragment;
+
+    public static LockersFragment getInstance() {
+        if(lockersFragment == null) {
+            lockersFragment = new LockersFragment();
+        }
+        return lockersFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lockers_fragment, root, false);
@@ -22,6 +31,6 @@ public class LockersFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Toast.makeText(getActivity(), "In Lockers fragment", Toast.LENGTH_SHORT).show();
+
     }
 }

@@ -14,6 +14,15 @@ import com.ebay.lockers.R;
  */
 public class HomeFragment extends Fragment {
 
+    private static HomeFragment homeFragment = null;
+
+    public static HomeFragment getInstance() {
+        if(homeFragment == null) {
+            homeFragment = new HomeFragment();
+        }
+        return homeFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, root, false);
@@ -22,6 +31,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Toast.makeText(getActivity(), "In home fragment", Toast.LENGTH_SHORT).show();
+
     }
 }
