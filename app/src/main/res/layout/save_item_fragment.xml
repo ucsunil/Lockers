@@ -22,6 +22,7 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_below="@+id/nameContainer"
+        android:id="@+id/descriptionContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -34,6 +35,23 @@
             android:scrollbars="vertical"
             android:inputType="textMultiLine"
             android:maxLines="3" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/descriptionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:hint="@string/enter_tags"
+            android:scrollbars="vertical"
+            android:maxLines="1"
+            android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
 

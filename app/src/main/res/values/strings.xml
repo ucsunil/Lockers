@@ -19,4 +19,5 @@
     <string name="cancel">Cancel</string>
     <string name="enter_item_name">Item Name</string>
     <string name="enter_description">Enter Item Description...</string>
+    <string name="enter_tags">Item Tags</string>
 </resources>

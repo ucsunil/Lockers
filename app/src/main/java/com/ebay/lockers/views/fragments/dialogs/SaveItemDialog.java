@@ -14,6 +14,12 @@ import com.ebay.lockers.R;
  */
 public class SaveItemDialog extends DialogFragment {
 
+    public static SaveItemDialog newInstance(Bundle bundle) {
+        SaveItemDialog saveItemDialog = new SaveItemDialog();
+        saveItemDialog.setArguments(bundle);
+        return saveItemDialog;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.save_item_fragment, container, false);

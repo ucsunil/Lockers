@@ -98,6 +98,8 @@ public class ItemsFragment extends Fragment
 
     private static ItemsFragment itemsFragment = null;
 
+    private Bundle details;
+
     public static ItemsFragment getInstance() {
         if(itemsFragment == null) {
             itemsFragment = new ItemsFragment();
@@ -175,7 +177,10 @@ public class ItemsFragment extends Fragment
             = new ImageReader.OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+            String imageSavePath = getActivity().getExternalFilesDir(null) + "images/tempimages/";
+            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(imageSavePath + "pic" + System.currentTimeMillis() + ".jpg")));
+            // mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(getActivity().getExternalFilesDir(null), "images/tempimages/pic.jpg")));
+            details.putString("tempimagespath", imageSavePath);
         }
     };
 
@@ -326,12 +331,13 @@ public class ItemsFragment extends Fragment
         view.findViewById(R.id.picture).setOnClickListener(this);
         view.findViewById(R.id.saveItem).setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
+        details = new Bundle();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mFile = new File(getActivity().getExternalFilesDir(null), "tempimages/pic.jpg");
+        // mFile = new File(getActivity().getExternalFilesDir(null), "images/tempimages/pic.jpg");
         Log.d(TAG, mFile.getAbsolutePath());
         Toast.makeText(getActivity(), mFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
     }
