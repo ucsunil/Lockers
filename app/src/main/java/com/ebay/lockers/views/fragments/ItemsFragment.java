@@ -43,6 +43,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.ebay.lockers.R;
@@ -99,6 +100,8 @@ public class ItemsFragment extends Fragment
     private static ItemsFragment itemsFragment = null;
 
     private Bundle details;
+
+    private Button save;
 
     public static ItemsFragment getInstance() {
         if(itemsFragment == null) {
@@ -178,9 +181,17 @@ public class ItemsFragment extends Fragment
         @Override
         public void onImageAvailable(ImageReader reader) {
             String imageSavePath = getActivity().getExternalFilesDir(null) + "images/tempimages/";
-            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(imageSavePath + "pic" + System.currentTimeMillis() + ".jpg")));
-            // mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(getActivity().getExternalFilesDir(null), "images/tempimages/pic.jpg")));
+            //mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(imageSavePath + "pic" + System.currentTimeMillis() + ".jpg")));
+            File file = new File(getContext().getFilesDir() + "/images/tempimages/");
+            if(!file.exists()) {
+                file.mkdirs();
+            }
+            // mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(getActivity().getExternalFilesDir(null), "pic.jpg")));
+            // mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(file, "pic.jpg")));
             details.putString("tempimagespath", imageSavePath);
+            Toast.makeText(getActivity(), "Image saved at: " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+            // save.setEnabled(true);
         }
     };
 
@@ -329,7 +340,8 @@ public class ItemsFragment extends Fragment
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         view.findViewById(R.id.picture).setOnClickListener(this);
-        view.findViewById(R.id.saveItem).setOnClickListener(this);
+        save = (Button) view.findViewById(R.id.saveItem);
+        save.setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
         details = new Bundle();
     }
@@ -337,9 +349,9 @@ public class ItemsFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // mFile = new File(getActivity().getExternalFilesDir(null), "images/tempimages/pic.jpg");
-        Log.d(TAG, mFile.getAbsolutePath());
-        Toast.makeText(getActivity(), mFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+        //mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
+        // Log.d(TAG, mFile.getAbsolutePath());
+        // Toast.makeText(getActivity(), mFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -714,8 +726,8 @@ public class ItemsFragment extends Fragment
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    showToast("Saved: " + mFile);
-                    Log.d(TAG, mFile.toString());
+                    //showToast("Saved: " + mFile);
+                    //Log.d(TAG, mFile.toString());
                     unlockFocus();
                 }
             };
