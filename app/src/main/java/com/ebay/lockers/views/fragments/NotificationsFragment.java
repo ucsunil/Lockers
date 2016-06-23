@@ -2,12 +2,15 @@ package com.ebay.lockers.views.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ebay.lockers.R;
+import com.ebay.lockers.adapters.NotificationsListAdapter;
 
 /**
  * Created by Sunil on 6/15/2016.
@@ -15,6 +18,10 @@ import com.ebay.lockers.R;
 public class NotificationsFragment extends Fragment {
 
     private static NotificationsFragment notificationsFragment = null;
+
+    private RecyclerView notifications;
+    private NotificationsListAdapter notificationsAdapter;
+    private LinearLayoutManager layoutManager;
 
     public static NotificationsFragment getInstance() {
         if(notificationsFragment == null) {
@@ -31,6 +38,10 @@ public class NotificationsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
+        notifications = (RecyclerView) view.findViewById(R.id.notifications);
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        notifications.setLayoutManager(layoutManager);
+        notificationsAdapter = new NotificationsListAdapter(getActivity(), null);
+        notifications.setAdapter(notificationsAdapter);
     }
 }

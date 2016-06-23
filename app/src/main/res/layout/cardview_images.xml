@@ -4,6 +4,8 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    card_view:cardBackgroundColor="@android:color/transparent"
+    card_view:cardElevation="0dp"
     card_view:cardCornerRadius="8dp">
     <com.ebay.lockers.views.custom.SquareImageView
         android:id="@+id/item"

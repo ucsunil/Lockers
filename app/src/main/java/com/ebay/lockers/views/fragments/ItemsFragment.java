@@ -180,18 +180,17 @@ public class ItemsFragment extends Fragment
             = new ImageReader.OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            String imageSavePath = getActivity().getExternalFilesDir(null) + "images/tempimages/";
-            //mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(imageSavePath + "pic" + System.currentTimeMillis() + ".jpg")));
             File file = new File(getContext().getFilesDir() + "/images/tempimages/");
             if(!file.exists()) {
-                file.mkdirs();
+                Log.d(TAG, "folder did not exist");
+                if(!file.mkdirs()) {
+                    Log.d(TAG, "Could not create folder");
+                }
             }
-            // mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(getActivity().getExternalFilesDir(null), "pic.jpg")));
-            // mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
-            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(file, "pic.jpg")));
-            details.putString("tempimagespath", imageSavePath);
+            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), new File(file, "pic" + System.currentTimeMillis() + ".jpg")));
+            details.putString("tempimagespath", file.getAbsolutePath());
             Toast.makeText(getActivity(), "Image saved at: " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-            // save.setEnabled(true);
+            Log.d(TAG, "file is at: " + file.getAbsolutePath());
         }
     };
 
@@ -466,12 +465,14 @@ public class ItemsFragment extends Fragment
 
                 // We fit the aspect ratio of TextureView to the size of preview we picked.
                 int orientation = getResources().getConfiguration().orientation;
+                // setting aspect ratio seems to reduce camera preview display size
+                // at least on Galaxy Note 5
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    mTextureView.setAspectRatio(
-                            mPreviewSize.getWidth(), mPreviewSize.getHeight());
+                    // mTextureView.setAspectRatio(
+                    //        mPreviewSize.getWidth(), mPreviewSize.getHeight());
                 } else {
-                    mTextureView.setAspectRatio(
-                            mPreviewSize.getHeight(), mPreviewSize.getWidth());
+                    // mTextureView.setAspectRatio(
+                    //        mPreviewSize.getHeight(), mPreviewSize.getWidth());
                 }
 
                 // Check if the flash is supported.
@@ -779,10 +780,11 @@ public class ItemsFragment extends Fragment
         switch (view.getId()) {
             case R.id.picture: {
                 takePicture();
+                save.setEnabled(true);
                 break;
             }
             case R.id.saveItem: {
-                DialogFragment dialog = new SaveItemDialog();
+                SaveItemDialog dialog = SaveItemDialog.newInstance(details);
                 dialog.show(getFragmentManager(), "dialog");
             }
         }
