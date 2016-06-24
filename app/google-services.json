@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "890905553612",
+    "firebase_url": "https://lockers-9312e.firebaseio.com",
+    "project_id": "lockers-9312e",
+    "storage_bucket": "lockers-9312e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:890905553612:android:5b821055e1e30727",
+        "android_client_info": {
+          "package_name": "com.ebay.lockers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "890905553612-0oj22sjdudhtv6al3dveaueiepkulr6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXcL5Z9HqI1yTlqtE_C571q7MGSxCEr7o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

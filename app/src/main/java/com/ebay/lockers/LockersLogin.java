@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,8 +31,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.ebay.lockers.models.User;
+import com.ebay.lockers.utils.ConstantUtils;
 import com.ebay.lockers.views.ActivityHome;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,6 +171,9 @@ public class LockersLogin extends AppCompatActivity implements LoaderCallbacks<C
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+
+        mAuthTask = new UserLoginTask(email, password);
+        mAuthTask.execute((Void) null);
 
         boolean cancel = false;
         View focusView = null;
@@ -311,22 +326,50 @@ public class LockersLogin extends AppCompatActivity implements LoaderCallbacks<C
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
+            User user = new User(mEmail, mPassword);
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonIn = null;
+            String response = null;
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
+                jsonIn = mapper.writeValueAsString(user);
+                Log.d("json in", jsonIn);
+                // network access.
+                URL url = new URL(ConstantUtils.LOGIN_ENDPOINT);
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(5000);
+                connection.setConnectTimeout(10000);
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+
+                OutputStream os = connection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                writer.write(jsonIn);
+                writer.flush();
+                writer.close();
+                os.close();
+                connection.connect();
+                int status = connection.getResponseCode();
+                Log.d("status", String.valueOf(status));
+                switch(status) {
+                    case 200:
+                    case 201:
+                        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        StringBuilder sb = new StringBuilder();
+                        String line;
+                        while((line = br.readLine()) != null) {
+                            sb.append(line + "\n");
+                        }
+                        br.close();
+                        response = sb.toString();
+                        Log.d("Result of login", response);
+                        // ObjectNode root = mapper.readTree(response);
+                }
+            } catch (Exception ex) {
                 return false;
             }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
             // TODO: register the new account here.
             return true;
         }
