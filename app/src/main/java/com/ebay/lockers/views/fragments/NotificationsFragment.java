@@ -11,6 +11,10 @@ import android.widget.Toast;
 
 import com.ebay.lockers.R;
 import com.ebay.lockers.adapters.NotificationsListAdapter;
+import com.ebay.lockers.models.NotificationObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sunil on 6/15/2016.
@@ -22,6 +26,7 @@ public class NotificationsFragment extends Fragment {
     private RecyclerView notifications;
     private NotificationsListAdapter notificationsAdapter;
     private LinearLayoutManager layoutManager;
+    private List<NotificationObject> notificationsList;
 
     public static NotificationsFragment getInstance() {
         if(notificationsFragment == null) {
@@ -41,7 +46,27 @@ public class NotificationsFragment extends Fragment {
         notifications = (RecyclerView) view.findViewById(R.id.notifications);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         notifications.setLayoutManager(layoutManager);
-        notificationsAdapter = new NotificationsListAdapter(getActivity(), null);
+
+        if(notificationsList == null) {
+            notificationsList = new ArrayList<>();
+        }
+        if(notificationsAdapter == null) {
+            notificationsAdapter = new NotificationsListAdapter(getActivity(), notificationsList);
+        }
         notifications.setAdapter(notificationsAdapter);
+    }
+
+    public List<NotificationObject> getNotificationsList() {
+        if(this.notificationsList == null) {
+            notificationsList = new ArrayList<>();
+        }
+        return notificationsList;
+    }
+
+    public NotificationsListAdapter getNotificationsAdapter() {
+        if(notificationsAdapter == null) {
+            notificationsAdapter = new NotificationsListAdapter(getActivity(), notificationsList);
+        }
+        return notificationsAdapter;
     }
 }

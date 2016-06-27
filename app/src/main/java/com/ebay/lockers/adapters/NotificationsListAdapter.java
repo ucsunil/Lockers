@@ -33,12 +33,12 @@ public class NotificationsListAdapter extends RecyclerView.Adapter<Notifications
 
     @Override
     public void onBindViewHolder(NotificationsViewHolder holder, int position) {
-        holder.notificationText.setText("You have a notification");
+        holder.notificationText.setText(notifications.get(position).toString());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return notifications.size();
     }
 
     public static class NotificationsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

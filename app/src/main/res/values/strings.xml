@@ -20,4 +20,9 @@
     <string name="enter_item_name">Item Name</string>
     <string name="enter_description">Enter Item Description...</string>
     <string name="enter_tags">Item Tags</string>
+    <string name="accept">Accept</string>
+    <string name="counter">Counter</string>
+    <string name="decline">Decline</string>
+    <string name="add_edit_categories">Add or Edit Categories you are interested in</string>
+    <string name="prompt_categories">Add category</string>
 </resources>
