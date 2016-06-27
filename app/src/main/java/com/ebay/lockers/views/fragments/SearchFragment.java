@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ebay.lockers.R;
+import com.ebay.lockers.listeners.CategoriesMultichoiceModeListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
@@ -74,8 +75,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             }
         });
         categories = new ArrayList<>();
-        categoriesAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, categories);
+        categoriesAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, categories);
         categoriesList.setAdapter(categoriesAdapter);
+        categoriesList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        categoriesList.setMultiChoiceModeListener(new CategoriesMultichoiceModeListener(getActivity(), categoriesList, categoriesAdapter, categories));
     }
 
     @Override
@@ -88,7 +91,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 }
                 categories.add(category.getText().toString().trim());
                 categoriesAdapter.notifyDataSetChanged();
-                FirebaseMessaging.getInstance().subscribeToTopic(category.getText().toString().trim());
+                // FirebaseMessaging.getInstance().subscribeToTopic(category.getText().toString().trim());
                 category.setText("");
                 break;
         }
