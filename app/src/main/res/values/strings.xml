@@ -27,4 +27,9 @@
     <string name="prompt_categories">Add category</string>
     <string name="delete">Delete</string>
     <string name="delete_subscriptions">Delete Subscriptions</string>
+    <string name="enter_comment">Enter comment...</string>
+    <string name="offer">Offer</string>
+    <string name="locker_item">Item From Locker</string>
+    <string name="amount">Amount:</string>
+    <string name="send">Send</string>
 </resources>

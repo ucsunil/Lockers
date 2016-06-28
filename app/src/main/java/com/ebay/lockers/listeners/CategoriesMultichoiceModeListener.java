@@ -23,8 +23,6 @@ import java.util.List;
  */
 public class CategoriesMultichoiceModeListener implements AbsListView.MultiChoiceModeListener {
 
-    private static final String TAG = "CategoriesMultichoiceModeListener";
-
     Activity context;
     ActionMode activeMode;
     ListView listView;
@@ -68,22 +66,10 @@ public class CategoriesMultichoiceModeListener implements AbsListView.MultiChoic
                     positions.add(checked.keyAt(i));
                 }
                 Collections.sort(positions, Collections.reverseOrder());
-                Log.d(TAG, "positions.size() = " + positions.size());
-                Log.d(TAG, "categories.size() = " + categories.size());
                 for(int position : positions) {
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(categories.get(position));
                     adapter.remove(categories.get(position));
                 }
-                Log.d(TAG, "positions.size() = " + positions.size());
-                Log.d(TAG, "categories.size() = " + categories.size());
-                new Thread() {
-                    @Override
-                    public void run() {
-                        for(int position : positions) {
-                            FirebaseMessaging.getInstance().unsubscribeFromTopic(categories.get(position));
-                            categories.remove(position);
-                        }
-                    }
-                }.start();
                 listView.clearChoices();
                 return true;
 
