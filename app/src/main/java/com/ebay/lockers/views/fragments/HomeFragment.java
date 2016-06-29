@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ebay.lockers.R;
@@ -44,5 +47,28 @@ public class HomeFragment extends Fragment {
 
         adapter = new HomePageItemsAdapter(getActivity(), null);
         homePageItems.setAdapter(adapter);
+        homePageItems.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                if(homePageItems.getChildCount() > 0) {
+                    switch (e.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            homePageItems.findViewById(R.id.commentsList).getParent().requestDisallowInterceptTouchEvent(true);
+                            break;
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
     }
 }

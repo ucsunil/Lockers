@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.ebay.lockers.R;
 import com.ebay.lockers.models.HomePageItem;
 import com.ebay.lockers.views.ActivityHome;
+import com.ebay.lockers.views.fragments.dialogs.BuyItemDialog;
 import com.ebay.lockers.views.fragments.dialogs.ExchangeDialog;
 
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class HomePageItemsAdapter extends RecyclerView.Adapter<HomePageItemsAdap
     @Override
     public void onBindViewHolder(final HomePageItemViewHolder holder, int position) {
         holder.image.setImageResource(R.mipmap.ic_launcher);
-
+        holder.imageDescription.setText("Item " + position + "\nDescription for item " + position);
     }
 
     @Override
@@ -103,6 +105,9 @@ public class HomePageItemsAdapter extends RecyclerView.Adapter<HomePageItemsAdap
                                         // TO DO - Send Comment
                                         adapter.add(comment.getText().toString().trim());
                                         comment.setText("");
+
+                                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                                        imm.hideSoftInputFromInputMethod(comment.getWindowToken(), 0);
                                         return true;
                                     }
                                 }
@@ -130,6 +135,10 @@ public class HomePageItemsAdapter extends RecyclerView.Adapter<HomePageItemsAdap
                 case R.id.exchange:
                     DialogFragment exchangeDialog = new ExchangeDialog();
                     exchangeDialog.show(((ActivityHome) context).getSupportFragmentManager(), "exchangeDialog");
+                    break;
+                case R.id.buy:
+                    DialogFragment buyDialog = new BuyItemDialog();
+                    buyDialog.show(((ActivityHome) context).getSupportFragmentManager(), "buyDialog");
                     break;
             }
         }
