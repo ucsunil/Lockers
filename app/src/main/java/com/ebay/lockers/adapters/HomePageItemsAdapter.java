@@ -67,12 +67,24 @@ public class HomePageItemsAdapter extends RecyclerView.Adapter<HomePageItemsAdap
         private EditText comment;
         ArrayAdapter<String> adapter;
 
+        private boolean isFavorited = false;
+
         public HomePageItemViewHolder(View view) {
             super(view);
 
             image = (ImageView) view.findViewById(R.id.itemCover);
             imageDescription = (TextView) view.findViewById(R.id.itemDetails);
             favorite = (ImageView) view.findViewById(R.id.favorite);
+            favorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!isFavorited) {
+                        favorite.setImageResource(R.drawable.ic_favorite_border_black_48dp);
+                    } else {
+                        favorite.setImageResource(R.drawable.ic_favorite_black_48dp);
+                    }
+                }
+            });
             exchange = (ImageView) view.findViewById(R.id.exchange);
             buy = (ImageView) view.findViewById(R.id.buy);
             listView = (ListView) view.findViewById(R.id.commentsList);
@@ -88,7 +100,7 @@ public class HomePageItemsAdapter extends RecyclerView.Adapter<HomePageItemsAdap
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if(s.toString().trim().length() > 0) {
+                    if (s.toString().trim().length() > 0) {
                         comment.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_send_black_24dp, 0);
                         comment.setOnTouchListener(new View.OnTouchListener() {
                             @Override
@@ -98,16 +110,15 @@ public class HomePageItemsAdapter extends RecyclerView.Adapter<HomePageItemsAdap
                                 final int DRAWABLE_RIGHT = 2;
                                 final int DRAWABLE_BOTTOM = 3;
 
-                                if(event.getAction() == MotionEvent.ACTION_UP) {
-                                    if(event.getRawX() >= comment.getRight() - comment.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()) {
+                                if (event.getAction() == MotionEvent.ACTION_UP) {
+                                    if (event.getRawX() >= comment.getRight() - comment.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()) {
                                         // Means the send button was clicked
                                         // Send the comment and set the text to empty
                                         // TO DO - Send Comment
                                         adapter.add(comment.getText().toString().trim());
                                         comment.setText("");
-
                                         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                                        imm.hideSoftInputFromInputMethod(comment.getWindowToken(), 0);
+                                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                                         return true;
                                     }
                                 }
@@ -124,14 +135,13 @@ public class HomePageItemsAdapter extends RecyclerView.Adapter<HomePageItemsAdap
                 public void afterTextChanged(Editable s) {
 
                 }
-
             });
             loadSimpleComments();
         }
 
         @Override
         public void onClick(View v) {
-            switch(v.getId()) {
+            switch (v.getId()) {
                 case R.id.exchange:
                     DialogFragment exchangeDialog = new ExchangeDialog();
                     exchangeDialog.show(((ActivityHome) context).getSupportFragmentManager(), "exchangeDialog");

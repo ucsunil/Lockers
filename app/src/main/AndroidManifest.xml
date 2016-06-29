@@ -37,8 +37,7 @@
             android:enabled="true"
             android:exported="false" />
 
-        <service
-            android:name=".push.LockersInstanceIDService">
+        <service android:name=".push.LockersInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -48,6 +47,11 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".views.dialogs.ConfirmBuyDialogActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
+        <activity android:name=".views.dialogs.ConfirmExchangeDialogActivity" />
+        <activity android:name=".views.dialogs.ConfirmDeclineDialogactivity"></activity>
     </application>
 
 </manifest>

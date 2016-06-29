@@ -1,0 +1,17 @@
+{ "data": {
+	"user": "Sunil",
+    "transaction": "buy",
+    "offer": "$25",
+    "itemInterested": "camera"
+  },
+  "to" : "dbLQUzYABvM:APA91bE0i8rzBmqhjFrpBWqQittuoxc2Zo9uZjlKPxK2RnLdFJFay5aAkwBv7oUR0SAvBWqflfohIcPYqY4ae8sPNib1xfKXxAvqc4lXY9RtcX1sNxfdb6T0rQKTFO8zD-_n0_IYSwOG"
+}
+
+{ "data": {
+	"user": "Sunil",
+    "transaction": "buy",
+    "offer": "$25",
+    "itemInterested": "camera"
+  },
+  "to" : "/topics/hello"
+}

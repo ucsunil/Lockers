@@ -32,4 +32,8 @@
     <string name="locker_item">Item From Locker</string>
     <string name="amount">Amount:</string>
     <string name="send">Send</string>
+    <string name="accept_offer">Accept Offer</string>
+    <string name="make_counter">Make Counter Offer</string>
+    <string name="decline_offer">Decline Offer</string>
+    <string name="optional_message">Enter optional message...</string>
 </resources>
