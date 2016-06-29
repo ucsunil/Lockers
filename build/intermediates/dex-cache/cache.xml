@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="C:\Users\Sunil\Desktop\Lockers\Lockers\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="b5c485cbc8f96a4e6a0d5a602b8f87dff52ea25b">
-        <dex dex="C:\Users\Sunil\Desktop\Lockers\Lockers\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_7cf9a3897e41bf057ec142870b938458cc60f602\classes.dex" />
-    </item>
-
-</items>

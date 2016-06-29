@@ -33,7 +33,8 @@ import android.widget.TextView;
 
 import com.ebay.lockers.models.User;
 import com.ebay.lockers.utils.ConstantUtils;
-import com.ebay.lockers.views.dialogs.ConfirmBuyDialogActivity;
+import com.ebay.lockers.views.ActivityHome;
+import com.ebay.lockers.views.dialogs.ConfirmAcceptDialogActivity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
@@ -100,7 +101,7 @@ public class LockersLogin extends AppCompatActivity implements LoaderCallbacks<C
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();Intent intent = new Intent(LockersLogin.this, ConfirmBuyDialogActivity.class);
+                attemptLogin();Intent intent = new Intent(LockersLogin.this, ActivityHome.class);
                 startActivity(intent);
             }
         });
@@ -379,7 +380,7 @@ public class LockersLogin extends AppCompatActivity implements LoaderCallbacks<C
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent(LockersLogin.this, ConfirmBuyDialogActivity.class);
+                Intent intent = new Intent(LockersLogin.this, ConfirmAcceptDialogActivity.class);
                 startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

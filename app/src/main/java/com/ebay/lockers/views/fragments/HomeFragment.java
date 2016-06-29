@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.ebay.lockers.R;
 import com.ebay.lockers.adapters.HomePageItemsAdapter;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 /**
  * Created by Sunil on 6/15/2016.
@@ -41,6 +42,8 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d("token", token);
         homePageItems = (RecyclerView) view.findViewById(R.id.homepageItems);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         homePageItems.setLayoutManager(layoutManager);

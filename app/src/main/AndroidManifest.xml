@@ -48,8 +48,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".views.dialogs.ConfirmBuyDialogActivity"
-            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
+        <activity android:name=".views.dialogs.ConfirmAcceptDialogActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
+
         <activity android:name=".views.dialogs.ConfirmExchangeDialogActivity" />
         <activity android:name=".views.dialogs.ConfirmDeclineDialogactivity"></activity>
     </application>
