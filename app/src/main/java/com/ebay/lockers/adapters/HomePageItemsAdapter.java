@@ -79,9 +79,11 @@ public class HomePageItemsAdapter extends RecyclerView.Adapter<HomePageItemsAdap
                 @Override
                 public void onClick(View v) {
                     if(!isFavorited) {
-                        favorite.setImageResource(R.drawable.ic_favorite_border_black_48dp);
-                    } else {
                         favorite.setImageResource(R.drawable.ic_favorite_black_48dp);
+                        isFavorited = true;
+                    } else {
+                        favorite.setImageResource(R.drawable.ic_favorite_border_black_48dp);
+                        isFavorited = false;
                     }
                 }
             });

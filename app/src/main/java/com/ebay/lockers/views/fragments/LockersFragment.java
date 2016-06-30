@@ -54,16 +54,15 @@ public class LockersFragment extends Fragment {
 
         objects = new ArrayList<>();
         loadAllImagesForUser();
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisible) {
-        super.setUserVisibleHint(isVisible);
-
-        if(isVisible) {
-            adapter = new ImagesGridAdapter(getActivity(), objects);
-            recycler.setAdapter(adapter);
-        }
+        adapter = new ImagesGridAdapter(getActivity(), objects);
+        // The post method runs only on the UI thread and hence
+        // forces wait until the view is visible
+        recycler.post(new Runnable() {
+            @Override
+            public void run() {
+                recycler.setAdapter(adapter);
+            }
+        });
     }
 
     private void loadAllImagesForUser() {
