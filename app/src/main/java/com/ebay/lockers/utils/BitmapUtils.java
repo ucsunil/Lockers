@@ -3,7 +3,9 @@ package com.ebay.lockers.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.widget.ImageView;
 
 import java.io.File;
 
@@ -23,15 +25,12 @@ public class BitmapUtils {
         // Decode bitmap
         options.inJustDecodeBounds = false;
 
-        // Bitmap scaledBitmap =  BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-
+        // Camera images will be in landscape mode by default
         if(options.outHeight < options.outWidth) {
             // rotate bitmap by 90
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             Bitmap scaledBitmap =  BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-            Log.d("Utils:", "ImageHeight = " + scaledBitmap.getHeight());
-            Log.d("Utils:", "ImageWidth = " + scaledBitmap.getWidth());
             Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
             scaledBitmap.recycle();
             return rotatedBitmap;
@@ -79,5 +78,30 @@ public class BitmapUtils {
                 bm, 0, 0, width, height, matrix, false);
         bm.recycle();
         return resizedBitmap;
+    }
+
+    public static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
+        if(imageView != null) {
+            final Drawable drawable = imageView.getDrawable();
+            if(drawable instanceof AsyncDrawable) {
+                final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
+                return asyncDrawable.getBitmapWorkerTask();
+            }
+        }
+        return null;
+    }
+
+    public static boolean cancelPotentialWork(File file, ImageView imageView) {
+        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
+        if(bitmapWorkerTask != null) {
+            final File imageFile = bitmapWorkerTask.getImageFile();
+            if(imageFile == null || !imageFile.getAbsolutePath().equals(file.getAbsolutePath())) {
+                // Cancel previous task
+                bitmapWorkerTask.cancel(true);
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }

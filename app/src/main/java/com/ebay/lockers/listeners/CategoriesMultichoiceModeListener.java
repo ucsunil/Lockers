@@ -71,6 +71,7 @@ public class CategoriesMultichoiceModeListener implements AbsListView.MultiChoic
                     adapter.remove(categories.get(position));
                 }
                 listView.clearChoices();
+                activeMode.finish();
                 return true;
 
         }

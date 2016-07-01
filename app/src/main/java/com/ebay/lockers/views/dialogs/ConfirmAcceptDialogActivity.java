@@ -20,6 +20,7 @@ public class ConfirmAcceptDialogActivity extends AppCompatActivity implements Vi
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         close = (ImageView) findViewById(R.id.closeDialog);
+        close.setOnClickListener(this);
     }
 
     @Override

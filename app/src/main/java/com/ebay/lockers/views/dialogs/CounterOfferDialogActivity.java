@@ -27,6 +27,7 @@ public class CounterOfferDialogActivity extends AppCompatActivity implements Vie
         theirLockerItems = (Spinner) findViewById(R.id.theirLockerItems);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ConstantUtils.MOCK_ITEMS_ARRAY);
         theirLockerItems.setAdapter(adapter);
+        close.setOnClickListener(this);
     }
 
     @Override

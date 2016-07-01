@@ -32,6 +32,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 // import android.support.v13.app.FragmentCompat;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -64,7 +65,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class ItemsFragment extends Fragment
-        implements View.OnClickListener {//}, FragmentCompat.OnRequestPermissionsResultCallback {
+        implements View.OnClickListener, SaveItemDialog.SaveItemListener {//}, FragmentCompat.OnRequestPermissionsResultCallback {
 
     /**
      * Conversion from screen rotation to JPEG orientation.
@@ -342,6 +343,7 @@ public class ItemsFragment extends Fragment
         view.findViewById(R.id.picture).setOnClickListener(this);
         save = (FloatingActionButton) view.findViewById(R.id.saveItem);
         save.setOnClickListener(this);
+        save.setVisibility(View.GONE);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
         details = new Bundle();
     }
@@ -778,11 +780,12 @@ public class ItemsFragment extends Fragment
         switch (view.getId()) {
             case R.id.picture: {
                 takePicture();
-                save.setEnabled(true);
+                save.setVisibility(View.VISIBLE);
                 break;
             }
             case R.id.saveItem: {
                 SaveItemDialog dialog = SaveItemDialog.newInstance(details);
+                dialog.setTargetFragment(this, 0);
                 dialog.show(getFragmentManager(), "dialog");
             }
         }
@@ -793,6 +796,11 @@ public class ItemsFragment extends Fragment
             requestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
                     CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
         }
+    }
+
+    @Override
+    public void onItemSaved() {
+        save.setVisibility(View.GONE);
     }
 
     /**

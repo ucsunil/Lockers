@@ -32,7 +32,7 @@ public class ExchangeDialog extends DialogFragment implements View.OnClickListen
         send = (Button) view.findViewById(R.id.send);
         send.setOnClickListener(this);
         lockerItems = (Spinner) view.findViewById(R.id.lockerItems);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, ConstantUtils.MOCK_ITEMS_ARRAY);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, ConstantUtils.MOCK_ITEMS_ARRAY);
         lockerItems.setAdapter(adapter);
     }
 

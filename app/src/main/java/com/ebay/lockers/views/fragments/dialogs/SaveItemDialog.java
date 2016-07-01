@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ebay.lockers.R;
+import com.ebay.lockers.views.fragments.ItemsFragment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,6 +31,8 @@ public class SaveItemDialog extends DialogFragment implements View.OnClickListen
     private EditText name;
     private EditText description;
     private EditText tags;
+
+    private SaveItemListener saveListener;
 
     public static SaveItemDialog newInstance(Bundle bundle) {
         SaveItemDialog saveItemDialog = new SaveItemDialog();
@@ -59,6 +62,7 @@ public class SaveItemDialog extends DialogFragment implements View.OnClickListen
     @Override
     public void onStart() {
         super.onStart();
+        saveListener = (ItemsFragment) getTargetFragment();
         Dialog dialog = getDialog();
         if(dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -81,9 +85,14 @@ public class SaveItemDialog extends DialogFragment implements View.OnClickListen
                 }
                 // simply rename temp to create new item folder
                 tempFolderName.renameTo(itemSaveFolder);
+                saveListener.onItemSaved();
                 this.dismiss();
                 break;
         }
+    }
+
+    public interface SaveItemListener {
+        void onItemSaved();
     }
 
 }
