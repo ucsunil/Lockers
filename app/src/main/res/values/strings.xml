@@ -36,4 +36,5 @@
     <string name="make_counter">Make Counter Offer</string>
     <string name="decline_offer">Decline Offer</string>
     <string name="optional_message">Enter optional message...</string>
+    <string name="their_items">Their locker items</string>
 </resources>

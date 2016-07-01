@@ -11,4 +11,6 @@ public abstract class ConstantUtils {
     // change endpoint as needed
     public static final String LOGIN_ENDPOINT = APP_CONTEXT_URL + "/login";
 
+    public static final String[] MOCK_ITEMS_ARRAY = {"Item1", "Item2", "Item3", "Item4"};
+
 }

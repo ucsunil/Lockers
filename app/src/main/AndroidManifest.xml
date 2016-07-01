@@ -53,9 +53,16 @@
             android:launchMode="singleInstance"
             android:taskAffinity=""
             android:excludeFromRecents="true"/>
-
-        <activity android:name=".views.dialogs.ConfirmExchangeDialogActivity" />
-        <activity android:name=".views.dialogs.ConfirmDeclineDialogactivity"></activity>
+        <activity android:name=".views.dialogs.CounterOfferDialogActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
+        <activity android:name=".views.dialogs.ConfirmDeclineDialogactivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
     </application>
 
 </manifest>

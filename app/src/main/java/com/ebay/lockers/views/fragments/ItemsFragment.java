@@ -32,6 +32,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 // import android.support.v13.app.FragmentCompat;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -101,7 +102,7 @@ public class ItemsFragment extends Fragment
 
     private Bundle details;
 
-    private Button save;
+    private FloatingActionButton save;
 
     public static ItemsFragment getInstance() {
         if(itemsFragment == null) {
@@ -339,7 +340,7 @@ public class ItemsFragment extends Fragment
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         view.findViewById(R.id.picture).setOnClickListener(this);
-        save = (Button) view.findViewById(R.id.saveItem);
+        save = (FloatingActionButton) view.findViewById(R.id.saveItem);
         save.setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
         details = new Bundle();
@@ -348,9 +349,6 @@ public class ItemsFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
-        // Log.d(TAG, mFile.getAbsolutePath());
-        // Toast.makeText(getActivity(), mFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

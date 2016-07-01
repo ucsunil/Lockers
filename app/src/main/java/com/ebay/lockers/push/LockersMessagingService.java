@@ -15,6 +15,7 @@ import com.ebay.lockers.R;
 import com.ebay.lockers.models.NotificationObject;
 import com.ebay.lockers.views.dialogs.ConfirmAcceptDialogActivity;
 import com.ebay.lockers.views.dialogs.ConfirmDeclineDialogactivity;
+import com.ebay.lockers.views.dialogs.CounterOfferDialogActivity;
 import com.ebay.lockers.views.fragments.NotificationsFragment;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -72,6 +73,10 @@ public class LockersMessagingService extends FirebaseMessagingService {
                         .append(" for your locker item: ").append(params.get("itemInterested"));
                 builder.setContentTitle("Exchange offer from " + params.get("user"));
                 break;
+
+            case "decline":
+
+                break;
         }
 
         setActionsForOfferNotificationBuilder(builder);
@@ -106,7 +111,7 @@ public class LockersMessagingService extends FirebaseMessagingService {
         PendingIntent pendingDeclineIntent = PendingIntent.getActivity(this, 0,
                 declineIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Intent counterIntent = new Intent(this, ConfirmAcceptDialogActivity.class);
+        Intent counterIntent = new Intent(this, CounterOfferDialogActivity.class);
         counterIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingCounterIntent = PendingIntent.getActivity(this, 0,
