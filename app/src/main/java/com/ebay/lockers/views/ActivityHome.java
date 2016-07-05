@@ -9,11 +9,12 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.ebay.lockers.R;
+import com.ebay.lockers.views.fragments.CameraFragment;
 import com.ebay.lockers.views.fragments.HomeFragment;
-import com.ebay.lockers.views.fragments.ItemsFragment;
 import com.ebay.lockers.views.fragments.LockersFragment;
 import com.ebay.lockers.views.fragments.NotificationsFragment;
 import com.ebay.lockers.views.fragments.SearchFragment;
@@ -70,6 +71,13 @@ public class ActivityHome extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu, menu);
+        return true;
+    }
+
     private class HomeScreenViewPagerAdapter extends FragmentStatePagerAdapter {
 
         public HomeScreenViewPagerAdapter(FragmentManager fm) {
@@ -84,7 +92,7 @@ public class ActivityHome extends AppCompatActivity {
                 case 1:
                     return SearchFragment.getInstance();
                 case 2:
-                    return ItemsFragment.getInstance();
+                    return CameraFragment.getInstance();
                 case 3:
                     return NotificationsFragment.getInstance();
                 case 4:

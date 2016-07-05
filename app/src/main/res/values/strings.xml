@@ -37,4 +37,9 @@
     <string name="decline_offer">Decline Offer</string>
     <string name="optional_message">Enter optional message...</string>
     <string name="their_items">Their locker items</string>
+    <string name="profile_name">Sunilsingh David</string>
+    <string name="interests">Interests: aaa, bbb, ccc, ebay hackathon 2016</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
 </resources>

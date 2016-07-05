@@ -35,7 +35,7 @@ public class BitmapWorkerTask extends AsyncTask<File, Void, Bitmap> {
             return null;
         }
         input = params[0];
-        Bitmap image = BitmapUtils.decodeSampledBitmap(input, imageWidth, imageHeight);
+        Bitmap image = BitmapUtils.decodeSampledBitmap(input, imageWidth/2, imageHeight/2);
 
         // resize bitmap if necessary - based on requirements as we need to fill the card view
         Bitmap scaledBitmap = BitmapUtils.resizeBitmap(image, imageWidth, (imageWidth*4)/3);

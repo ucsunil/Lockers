@@ -17,6 +17,7 @@ public class BitmapUtils {
     public static Bitmap decodeSampledBitmap(File file, int reqWidth, int reqHeight) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
+        Log.d("Hello", "1");
         BitmapFactory.decodeFile(file.getAbsolutePath(), options);
 
         // Calculate sampleSize
@@ -30,11 +31,13 @@ public class BitmapUtils {
             // rotate bitmap by 90
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
+            Log.d("Hello", "2");
             Bitmap scaledBitmap =  BitmapFactory.decodeFile(file.getAbsolutePath(), options);
             Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
             scaledBitmap.recycle();
             return rotatedBitmap;
         } else {
+            Log.d("Hello", "3");
             return  BitmapFactory.decodeFile(file.getAbsolutePath(), options);
         }
 

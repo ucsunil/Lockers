@@ -3,7 +3,6 @@ package com.ebay.lockers.views.fragments.dialogs;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ebay.lockers.R;
-import com.ebay.lockers.views.fragments.ItemsFragment;
+import com.ebay.lockers.views.fragments.CameraFragment;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
 
 /**
  * Created by Sunil on 6/19/2016.
@@ -62,7 +57,7 @@ public class SaveItemDialog extends DialogFragment implements View.OnClickListen
     @Override
     public void onStart() {
         super.onStart();
-        saveListener = (ItemsFragment) getTargetFragment();
+        saveListener = (CameraFragment) getTargetFragment();
         Dialog dialog = getDialog();
         if(dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;

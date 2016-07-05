@@ -13,7 +13,7 @@
         android:id="@+id/images"
         android:layout_above="@+id/control"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="wrap_content" />
 
     <FrameLayout
         android:id="@+id/control"
